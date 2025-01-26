@@ -1,101 +1,94 @@
-import Image from "next/image";
+"use client";
+import { GrTarget } from "react-icons/gr";
+import { LuArrowRight, LuLightbulb, LuZap } from "react-icons/lu";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+export default function LandingPage() {
+	return (
+		<div className="flex flex-col dark:bg-background">
+			{/* Hero Section */}
+			<section className="py-20 text-center md:h-[70vh] flex items-center justify-center relative">
+				{/* bg color and grid */}
+				<div className="absolute -top-1 inset-0 h-full w-full bg-white dark:bg-background bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#5555552e_1px,transparent_1px),linear-gradient(to_bottom,#5555552e_1px,transparent_1px)] bg-[size:40px_40px]" />
+				{/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-muted dark:bg-background" /> */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+				{/* belowed gradient fade */}
+				<div className="absolute bottom-0 left-0 right-0 h-32 dark:bg-[linear-gradient(to_bottom,transparent,#05192D)] mask-[linear-gradient(to_bottom,transparent,black_50%)]" />
+
+				<div className="flex flex-col items-center mx-auto px-4 z-10">
+					<h1 className="text-4xl font-bold mb-6 sm:text-5xl md:text-8xl text-black dark:text-white">
+						Generate Brilliant Project <br /> Ideas to You
+					</h1>
+					<p className="text-xl mb-8 text-gray-700 dark:text-white dark:text-muted-foreground max-w-2xl mx-auto">
+						Creovate helps you discover the perfect project based on your unique
+						preferences and skills.
+					</p>
+					<a
+						href="/"
+						className="flex gap-2 items-center bg-primary text-background font-semibold w-fit rounded-md px-3 py-2 hover:-translate-x-1 hover:-translate-y-1 duration-300"
+					>
+						Get Started <LuArrowRight />
+					</a>
+					{/* </div> */}
+				</div>
+			</section>
+
+			{/* Features Section */}
+			<section className="flex justify-center py-8 md:py-24 bg-muted dark:bg-background">
+				<div className="w-full md:w-[70vw] mx-auto px-4">
+					<h2 className="text-3xl font-bold mb-12 text-center dark:text-white">
+						How It Works
+					</h2>
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+						<FeatureCard
+							icon={<GrTarget className="h-10 w-10 text-foreground" />}
+							title="Define Your Interests"
+							description="Tell us about your passions, skills, and goals."
+						/>
+						<FeatureCard
+							icon={<LuZap className="h-10 w-10 text-foreground" />}
+							title="AI-Powered Suggestions"
+							description="Our algorithm generates tailored project ideas."
+						/>
+						<FeatureCard
+							icon={<LuLightbulb className="h-10 w-10 text-foreground" />}
+							title="Bring Ideas to Life"
+							description="Get detailed guides and resources to start your project."
+						/>
+					</div>
+				</div>
+			</section>
+
+			{/* Call to Action Section */}
+			<section id="get-started" className="py-20">
+				<div className="container mx-auto px-4 text-center">
+					<h2 className="text-3xl font-bold mb-6 dark:text-white">
+						Ready to Find Your Next Big Idea?
+					</h2>
+					<p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
+						Join thousands of creators who have discovered their perfect project
+						with Creovate.
+					</p>
+					<button type="submit">
+						<a href="/signup">Start Generating Ideas</a>
+					</button>
+				</div>
+			</section>
+		</div>
+	);
+}
+
+interface FeatureCardProps {
+	icon: React.ReactNode;
+	title: string;
+	description: string;
+}
+
+function FeatureCard({ icon, title, description }: FeatureCardProps) {
+	return (
+		<div className="flex flex-col items-center text-center p-6 bg-background rounded-lg shadow-sm dark:bg-[#13283d]">
+			<div className="mb-4 text-primary">{icon}</div>
+			<h3 className="text-xl font-semibold mb-2 dark:text-white">{title}</h3>
+			<p className="text-muted-foreground">{description}</p>
+		</div>
+	);
 }
