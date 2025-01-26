@@ -9,7 +9,7 @@ const ThemeToggle = () => {
 	return (
 		<div>
 			<Button
-				className="bg-slate-900 !hover:bg-red-900 text-white border-none"
+				className="bg-transparent border-none shadow-none hover:bg-red-800 text-foreground dark:text-foreground"
 				onClick={toggleTheme}
 				icon={theme === "light" ? <BiSun /> : <BiMoon />}
 			/>

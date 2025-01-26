@@ -14,6 +14,7 @@ const config: Config = {
 				backgroundDark: "var(--background-dark)",
 				foreground: "var(--foreground)",
 				primary: "var(--primary)",
+				buttonPrimary: "var(--button-primary)",
 				secondary: "var(--secondary)",
 				accent: "var(--accent)",
 				warning: "var(--warning)",
