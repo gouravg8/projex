@@ -4,10 +4,13 @@
 
 :root {
 	/* Light mode */
-	--background: #f0f8ff;
+	/* --background: #f0f8ff; */
+
+	--background: #deddda;
 	--foreground: #171717;
 	--primary: #e6f0ff;
-	--button-primary: #7ae364;
+	/* --button-primary: #7ae364; */
+	--button-primary: #e4e135;
 	--secondary: #dcefff;
 	--accent: #ffd700;
 	--warning: #ff6b6b;
@@ -15,13 +18,15 @@
 
 /* Optional: Class-based dark mode (recommended for better control) */
 .dark {
-	/* --background: #05192d; */
-	--background: #072333;
-	/* --background-dark: #041424; */
+	/* --background: #05192d;
+	--background: #072333; */
+	--background: #000;
+	--background-dark: #041424;
 	--background-dark: #051f2e;
-	--foreground: #ededed;
+	--foreground: #deddda;
 	--primary: #7ae364;
-	--button-primary: #7ae364;
+	/* --button-primary: #7ae364; */
+	--button-primary: #e4e135;
 	/* --secondary: #1a344e; */
 	--secondary: #083047;
 	--accent: #006a67;

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/footer";
+import QueryProvider from "./QueryProvider";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -33,7 +34,7 @@ export default function RootLayout({
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 				>
 					<Navbar />
-					{children}
+					<QueryProvider>{children}</QueryProvider>
 					<Footer />
 				</body>
 			</html>

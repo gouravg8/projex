@@ -11,7 +11,8 @@ const config: Config = {
 		extend: {
 			colors: {
 				background: "var(--background)",
-				backgroundDark: "var(--background-dark)",
+				// backgroundDark: "var(--background-dark)",
+				backgroundDark: "var(--background)",
 				foreground: "var(--foreground)",
 				primary: "var(--primary)",
 				buttonPrimary: "var(--button-primary)",

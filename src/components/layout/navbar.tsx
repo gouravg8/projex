@@ -3,13 +3,13 @@ import Link from "next/link";
 import ThemeToggle from "../theme-toggle";
 import { useTheme } from "../theme-provider";
 import { Button } from "antd";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
 	const { theme } = useTheme();
-	const router = useRouter();
 	const [isScrolled, setIsScrolled] = useState(false);
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -22,8 +22,8 @@ export default function Navbar() {
 		<nav
 			className={`flex justify-center sticky top-0 z-50 text-foreground dark:text-foreground
         ${
-					isScrolled
-						? "backdrop-blur-md bg-background/80 dark:bg-backgroundDark/80"
+					isScrolled && pathname === "/"
+						? "backdrop-blur-md bg-background/60 dark:bg-backgroundDark/60"
 						: "bg-background dark:bg-backgroundDark"
 				}`}
 		>
@@ -46,9 +46,12 @@ export default function Navbar() {
 					>
 						Features
 					</Link>
-					<Button className="font-semibold border-none bg-buttonPrimary">
+					<Link
+						href={"/create"}
+						className="px-2 py-2 font-semibold border-none rounded-md text-[#041424] bg-buttonPrimary"
+					>
 						Get Started
-					</Button>
+					</Link>
 				</div>
 			</div>
 		</nav>
