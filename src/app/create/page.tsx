@@ -29,7 +29,7 @@ const IndexPage = () => {
 	};
 
 	return (
-		<div className="min-h-[90vh] bg-[#fafdff] lg:mt-12">
+		<div className="min-h-[90vh] bg-background lg:pt-12">
 			<div className="my-8 text-center w-[90vw] mx-auto">
 				<p className="text-lg text-muted-foreground">
 					Tell us your preferences and we'll generate the perfect project for
@@ -100,9 +100,9 @@ const IndexPage = () => {
 				<Item>
 					<Button
 						htmlType="submit"
-						className={`w-full col-span-1 py-5 font-semibold text-backgroundDark lg:py-4 ${
-							isSubmitting ? "bg-red-500" : "bg-buttonPrimary"
-						}`}
+						className={
+							"w-full col-span-1 py-5 font-semibold text-[#041424] lg:py-4 bg-buttonPrimary"
+						}
 					>
 						Submit
 					</Button>

@@ -35,7 +35,7 @@ export default function LandingPage() {
 			</section>
 
 			{/* Features Section */}
-			<section className="flex justify-center py-8 md:py-24 bg-muted dark:bg-background bg-background ">
+			<section className="flex justify-center py-8 md:py-12 bg-muted dark:bg-background bg-background ">
 				<div className="w-full md:w-[70vw] mx-auto px-4">
 					<h2 className="mb-12 text-3xl font-bold text-center text-foreground dark:text-foreground">
 						How It Works
