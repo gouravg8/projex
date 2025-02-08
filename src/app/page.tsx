@@ -1,4 +1,6 @@
 "use client";
+import HowItWorks from "@/components/home/HowItWorks";
+import WhyToUse from "@/components/home/WhyToUse";
 import { Button } from "antd";
 import React from "react";
 import { GrTarget } from "react-icons/gr";
@@ -10,9 +12,6 @@ export default function LandingPage() {
 			{/* Hero Section */}
 			<section className="py-20 text-center md:h-[70vh] flex items-center justify-center relative">
 				{/* bg color and grid */}
-				{/* <div className="absolute -top-1 inset-0 h-full w-full bg-background dark:bg-background bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#5555552e_1px,transparent_1px),linear-gradient(to_bottom,#5555552e_1px,transparent_1px)] bg-[size:80px_80px]" /> */}
-
-				{/* belowed gradient fade */}
 				{/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(to_bottom,transparent,#f0f8ff)] dark:bg-[linear-gradient(to_bottom,transparent,#072333)] mask-[linear-gradient(to_bottom,transparent,black_50%)]" /> */}
 				<div className="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(to_bottom,transparent,#daddda)] dark:bg-[linear-gradient(to_bottom,transparent,#000)] mask-[linear-gradient(to_bottom,transparent,black_50%)]" />
 
@@ -34,31 +33,11 @@ export default function LandingPage() {
 				</div>
 			</section>
 
-			{/* Features Section */}
-			<section className="flex justify-center py-8 md:py-12 bg-muted dark:bg-background bg-background ">
-				<div className="w-full md:w-[70vw] mx-auto px-4">
-					<h2 className="mb-12 text-3xl font-bold text-center text-foreground dark:text-foreground">
-						How It Works
-					</h2>
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-3 text-white">
-						<FeatureCard
-							icon={<GrTarget />}
-							title="Define Your Interests"
-							description="Tell us about your passions, skills, and goals."
-						/>
-						<FeatureCard
-							icon={<LuZap />}
-							title="AI-Powered Suggestions"
-							description="Our algorithm generates tailored project ideas."
-						/>
-						<FeatureCard
-							icon={<LuLightbulb />}
-							title="Bring Ideas to Life"
-							description="Get detailed guides and resources to start your project."
-						/>
-					</div>
-				</div>
-			</section>
+			{/* How It Works Section */}
+			<HowItWorks />
+
+			{/* Why Use Project Idea Generator Section */}
+			<WhyToUse />
 
 			{/* Call to Action Section */}
 			<section
@@ -79,26 +58,6 @@ export default function LandingPage() {
 					</Button>
 				</div>
 			</section>
-		</div>
-	);
-}
-
-interface FeatureCardProps {
-	icon: React.ReactNode;
-	title: string;
-	description: string;
-}
-
-function FeatureCard({ icon, title, description }: FeatureCardProps) {
-	return (
-		<div className="flex flex-col items-center p-6 text-center rounded-lg shadow-sm bg-foreground">
-			<div>
-				{React.cloneElement(icon as React.ReactElement, {
-					className: "size-14 mb-2 text-background",
-				})}
-			</div>
-			<h3 className="mb-2 text-xl font-semibold text-background">{title}</h3>
-			<p className="text-muted-foreground text-background">{description}</p>
 		</div>
 	);
 }
