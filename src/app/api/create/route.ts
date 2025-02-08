@@ -1,9 +1,37 @@
-// const { GoogleGenerativeAI } = require("@google/generative-ai");
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse, type NextRequest } from "next/server";
 
 if (!process.env.GOOGLE_API_KEY) {
 	throw new Error("GOOGLE_API_KEY is not defined");
+}
+
+type DataType = {
+	difficulty: string;
+	type: string;
+	techStack: string[];
+	eagerToLearn: string;
+};
+function getPrompt(data: DataType) {
+	const { difficulty, type, techStack: techStackString, eagerToLearn } = data;
+	// for multiple tech stack
+	// const techStackString = techStack.join(", ");
+
+	return `	
+			Based on the following project specifications:
+
+			Difficulty: ${difficulty}
+			Type: ${type}
+			Tech Stack: ${techStackString}
+			Eager to Learn New Technologies: ${eagerToLearn}
+			
+			Create a step-by-step project roadmap outlining the development process. The roadmap should:
+			Start with a brief, high-level overview of the project's purpose and goals. This overview should be concise and understandable to someone with a general understanding of ${type} systems.
+			Break down the project into manageable phases or stages. Each phase should have a clear objective.
+			For each phase, detail the specific tasks and steps required for completion. Use action-oriented language (e.g., "Design the database schema," "Implement the API endpoint for...", "Write unit tests for...").
+			Specify the key deliverables for each phase. This could include things like documentation, working code, or completed tests.
+			Account for the fact that this project is of ${difficulty} difficulty and prioritize using ${techStackString}. ${eagerToLearn ? "use" : "Avoid"} introducing complex new technologies or architectural approaches unnecessarily. Focus on efficient and reliable execution using familiar tools.
+			Do NOT provide any actual code solutions or code snippets. This roadmap should focus solely on the steps and logic required to build the ${type} based pro, not the specific code implementation and output should be in Markdown format.
+			Assume the user has a knowledge of ${type} ${techStackString} environment."`;
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -17,12 +45,10 @@ const generationConfig = {
 };
 
 export async function POST(req: NextRequest) {
-	const { data } = await req.json();
+	const data = await req.json();
 
-	// make the polished prompt
 	// add json type response from google
-	const prompt = "Explain how AI works inshortly";
+	const prompt = getPrompt(data);
 	const result = await model.generateContent(prompt);
-	console.log(JSON.stringify(result));
 	return NextResponse.json(result.response.text());
 }

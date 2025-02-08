@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Select, Button, Form, message } from "antd";
 import Output from "@/components/create/Output";
-import axios from "axios";
+import axios, { type AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const { Option } = Select;
@@ -15,7 +15,6 @@ const IndexPage = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [shouldFetch, setShouldFetch] = useState(false);
 
-	const ans = false;
 	// Fetch country from OS (simplified example)
 	useEffect(() => {
 		const userLanguage = navigator.language || "en-US";
