@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Select, Button, Form, message } from "antd";
+import Output from "@/components/create/Output";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const { Option } = Select;
 const { Item } = Form;
@@ -10,7 +13,9 @@ const IndexPage = () => {
 	const [form] = Form.useForm();
 	const [country, setCountry] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [shouldFetch, setShouldFetch] = useState(false);
 
+	const ans = false;
 	// Fetch country from OS (simplified example)
 	useEffect(() => {
 		const userLanguage = navigator.language || "en-US";
@@ -18,16 +23,27 @@ const IndexPage = () => {
 		setCountry(countryCode.toUpperCase());
 	}, []);
 
-	const onFinish = (values: FormData) => {
-		setIsSubmitting(true);
-		message.success("Form submitted successfully!");
-		console.log("Form Values:", { ...values, country });
-		setTimeout(() => {
-			setIsSubmitting(false);
-			form.resetFields();
-		}, 1000);
+	const fetchProject = async () => {
+		const { data } = await axios.post("/api/create");
+		return data;
 	};
 
+	const onFinish = (values: FormData) => {
+		setIsSubmitting(true);
+
+		message.success("Form submitted successfully!");
+		console.log("Form Values:", { ...values, country });
+
+		setShouldFetch(true);
+		setIsSubmitting(false);
+		form.resetFields();
+	};
+
+	const { data, isLoading, isError, error } = useQuery({
+		queryKey: ["project", onFinish],
+		queryFn: fetchProject,
+		enabled: shouldFetch,
+	});
 	return (
 		<div className="min-h-[90vh] bg-background lg:pt-12">
 			<div className="my-8 text-center w-[90vw] mx-auto">
@@ -103,11 +119,13 @@ const IndexPage = () => {
 						className={
 							"w-full col-span-1 py-5 font-semibold text-[#041424] lg:py-4 bg-buttonPrimary"
 						}
+						loading={isLoading}
 					>
 						Submit
 					</Button>
 				</Item>
 			</Form>
+			{ans && <Output data={data} />}
 		</div>
 	);
 };
