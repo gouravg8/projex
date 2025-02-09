@@ -5,14 +5,16 @@
 :root {
 	/* Light mode */
 	/* --background: #f0f8ff; */
+	/* --background: #fff; */
 
 	--background: #deddda;
+	--backgroundDark: #cacaca;
 	--foreground: #171717;
 	--primary: #e6f0ff;
 	/* --button-primary: #7ae364; */
 	--button-primary: #e4e135;
 	--secondary: #dcefff;
-	--accent: #ffd700;
+	--accent: #a8a8a8;
 	--warning: #ff6b6b;
 }
 
@@ -21,14 +23,28 @@
 	/* --background: #05192d;
 	--background: #072333; */
 	--background: #000;
-	--background-dark: #041424;
-	--background-dark: #051f2e;
+	--backgroundDark: #181818;
+	/* --background-dark: #051f2e; */
 	--foreground: #deddda;
 	--primary: #7ae364;
 	/* --button-primary: #7ae364; */
 	--button-primary: #e4e135;
 	/* --secondary: #1a344e; */
 	--secondary: #083047;
-	--accent: #006a67;
+	--accent: #7e7777;
 	--warning: #fff4b7;
+}
+
+:where(.css-dev-only-do-not-override-1htoz2s).ant-form-item
+	.ant-form-item-label
+	> label {
+	color: var(--foreground);
+}
+
+:where(.css-dev-only-do-not-override-1htoz2s).ant-select-outlined:not(
+		.ant-select-customize-input
+	)
+	.ant-select-selector {
+	background-color: var(--background);
+	border-color: #c5c5c5;
 }

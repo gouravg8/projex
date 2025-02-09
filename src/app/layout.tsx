@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/footer";
 import QueryProvider from "./QueryProvider";
+import { ConfigProvider, type ThemeConfig } from "antd";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -27,6 +28,20 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const customTheme: ThemeConfig = {
+		token: {
+			colorText: "var(--foreground)", // Adjust text color for better contrast in dark mode
+		},
+		components: {
+			Select: {
+				colorTextPlaceholder: "#A9A4A4", // Set text color for placeholder text
+				colorBgContainer: "#var(--background)", // Set background color for dropdown container
+				colorBorder: "var(--accent)", // Border color
+				optionSelectedBg: "var(--backgroundDark)",
+				boxShadow: "0 0 0 1px var(--accent)", // Border color
+			},
+		},
+	};
 	return (
 		<ThemeProvider>
 			<html lang="en">
@@ -34,7 +49,9 @@ export default function RootLayout({
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 				>
 					<Navbar />
-					<QueryProvider>{children}</QueryProvider>
+					<ConfigProvider theme={customTheme}>
+						<QueryProvider>{children}</QueryProvider>
+					</ConfigProvider>
 					<Footer />
 				</body>
 			</html>
