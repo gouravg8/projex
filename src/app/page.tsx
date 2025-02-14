@@ -20,7 +20,7 @@ export default function LandingPage() {
 						Generate Brilliant Project <br /> Ideas to You
 					</h1>
 					<p className="max-w-2xl mx-auto mb-8 text-xl text-foreground">
-						Creovate helps you discover the perfect project based on your unique
+						Projex helps you discover the perfect project based on your unique
 						preferences and skills.
 					</p>
 					<a
@@ -50,10 +50,10 @@ export default function LandingPage() {
 					</h2>
 					<p className="max-w-2xl mx-auto mb-8 text-xl text-foreground">
 						Join thousands of creators who have discovered their perfect project
-						with Creovate.
+						with Projex.
 					</p>
 
-					<Button className="font-semibold border-none bg-buttonPrimary">
+					<Button className="font-semibold text-black border-none bg-buttonPrimary">
 						Start Generating Ideas
 					</Button>
 				</div>

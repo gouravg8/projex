@@ -29,7 +29,7 @@ export default function Navbar() {
 		>
 			<div className="w-full md:w-[80vw] flex items-center justify-between py-4 px-6">
 				<Link href="/" className="text-2xl font-bold">
-					Creovate
+					Projex
 				</Link>
 				<div className="flex items-center space-x-4">
 					<ThemeToggle />
