@@ -12,9 +12,9 @@ type DataType = {
 	eagerToLearn: string;
 };
 function getPrompt(data: DataType) {
-	const { difficulty, type, techStack: techStackString, eagerToLearn } = data;
+	const { difficulty, type, techStack, eagerToLearn } = data;
 	// for multiple tech stack
-	// const techStackString = techStack.join(", ");
+	const techStackString = techStack.join(", ");
 
 	return `	
 			Based on the following project specifications:
