@@ -12,8 +12,8 @@ const loadingSteps = [
 ];
 
 const ProjectLoading = ({
-	loadingDuration = 7000,
-}: { loadingDuration: number }) => {
+	loadingDuration = 5000,
+}: { loadingDuration?: number }) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const stepDuration = loadingDuration / (loadingSteps.length - 1);
 
