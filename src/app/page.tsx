@@ -1,6 +1,7 @@
 "use client";
 import HowItWorks from "@/components/home/HowItWorks";
 import WhyToUse from "@/components/home/WhyToUse";
+import { PROJECT_NAME } from "@/constants";
 import { Button } from "antd";
 import React from "react";
 import { GrTarget } from "react-icons/gr";
@@ -20,12 +21,12 @@ export default function LandingPage() {
 						Generate Brilliant Project <br /> Ideas to You
 					</h1>
 					<p className="max-w-2xl mx-auto mb-8 text-xl text-foreground">
-						Projex helps you discover the perfect project based on your unique
-						preferences and skills.
+						{PROJECT_NAME} helps you discover the perfect project based on your
+						unique preferences and skills.
 					</p>
 					<a
 						href="/"
-						className="flex items-center gap-2 px-3 py-2 font-semibold duration-300 rounded-md text-[#041424] bg-buttonPrimary w-fit hover:-translate-x-1 hover:-translate-y-1"
+						className="flex items-center gap-2 px-3 py-2 font-semibold duration-300 rounded-md text-buttonText bg-buttonPrimary w-fit hover:-translate-x-1 hover:-translate-y-1"
 					>
 						Get Started <LuArrowRight />
 					</a>
@@ -50,10 +51,10 @@ export default function LandingPage() {
 					</h2>
 					<p className="max-w-2xl mx-auto mb-8 text-xl text-foreground">
 						Join thousands of creators who have discovered their perfect project
-						with Projex.
+						with {PROJECT_NAME}.
 					</p>
 
-					<Button className="font-semibold text-black border-none bg-buttonPrimary">
+					<Button className="font-semibold text-buttonText border-none bg-buttonPrimary">
 						Start Generating Ideas
 					</Button>
 				</div>

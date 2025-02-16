@@ -5,6 +5,7 @@ import { useTheme } from "../theme-provider";
 import { Button } from "antd";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PROJECT_NAME } from "@/constants";
 
 export default function Navbar() {
 	const { theme } = useTheme();
@@ -29,7 +30,7 @@ export default function Navbar() {
 		>
 			<div className="w-full md:w-[80vw] flex items-center justify-between py-4 px-6">
 				<Link href="/" className="text-2xl font-bold">
-					Projex
+					{PROJECT_NAME}
 				</Link>
 				<div className="flex items-center space-x-4">
 					<ThemeToggle />
@@ -48,7 +49,7 @@ export default function Navbar() {
 					</Link>
 					<Link
 						href={"/create"}
-						className="px-2 py-2 font-semibold border-none rounded-md text-[#041424] bg-buttonPrimary"
+						className="px-2 py-2 font-semibold border-none rounded-md text-buttonText bg-buttonPrimary"
 					>
 						Get Started
 					</Link>

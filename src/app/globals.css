@@ -12,7 +12,8 @@
 	--foreground: #171717;
 	--primary: #e6f0ff;
 	/* --button-primary: #7ae364; */
-	--button-primary: #e4e135;
+	--button-primary: #4f46e5;
+	--button-text: #fff;
 	--secondary: #dcefff;
 	--accent: #a8a8a8;
 	--warning: #ff6b6b;
@@ -28,7 +29,9 @@
 	--foreground: #deddda;
 	--primary: #7ae364;
 	/* --button-primary: #7ae364; */
-	--button-primary: #e4e135;
+	/* --button-primary: #e4e135; */
+	--button-primary: #4f46e5;
+	--button-text: #fff;
 	/* --secondary: #1a344e; */
 	--secondary: #083047;
 	--accent: #7e7777;
