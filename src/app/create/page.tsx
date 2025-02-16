@@ -13,7 +13,7 @@ const { Option } = Select;
 const { Item } = Form;
 
 const SuffixIcon = () => {
-	return <FiChevronDown className="text-foreground text-lg font-thin" />;
+	return <FiChevronDown className="text-lg font-thin text-foreground" />;
 };
 
 const IndexPage = () => {
@@ -45,11 +45,9 @@ const IndexPage = () => {
 	const onFinish = async (values: FormData) => {
 		try {
 			setShowLoading(true);
-			setLoadingStartTime(Date.now());
 			message.success("Form submitted successfully!");
 			await refetch();
 			const loadingDuration = Date.now() - (loadingStartTime || Date.now());
-			setLoadingStartTime(loadingDuration);
 			setShowLoading(false);
 			form.resetFields();
 		} catch (error) {
@@ -174,8 +172,9 @@ const IndexPage = () => {
 				<Item>
 					<Button
 						htmlType="submit"
+						type="primary"
 						className={
-							"w-full col-span-1 py-5 font-semibold text-[#041424] lg:py-4 bg-buttonPrimary"
+							"w-full px-2 py-2 font-semibold border-none rounded-md text-buttonText bg-buttonPrimary hover:bg-red-800 col-span-1"
 						}
 						// loading={isLoading}
 						loading={isLoading}
@@ -184,8 +183,10 @@ const IndexPage = () => {
 					</Button>
 				</Item>
 			</Form>
-			{showLoading && <ProjectLoading loadingDuration={loadingStartTime} />}
-			{data && <Output data={data} />}
+			{showLoading && <ProjectLoading />}
+
+			{data && !showLoading && <Output data={data} />}
+			{/* )} */}
 		</div>
 	);
 };

@@ -3,8 +3,8 @@ import HowItWorks from "@/components/home/HowItWorks";
 import WhyToUse from "@/components/home/WhyToUse";
 import { PROJECT_NAME } from "@/constants";
 import { Button } from "antd";
+import Link from "next/link";
 import React from "react";
-import { GrTarget } from "react-icons/gr";
 import { LuArrowRight, LuLightbulb, LuZap } from "react-icons/lu";
 
 export default function LandingPage() {
@@ -24,12 +24,12 @@ export default function LandingPage() {
 						{PROJECT_NAME} helps you discover the perfect project based on your
 						unique preferences and skills.
 					</p>
-					<a
+					<Link
 						href="/"
 						className="flex items-center gap-2 px-3 py-2 font-semibold duration-300 rounded-md text-buttonText bg-buttonPrimary w-fit hover:-translate-x-1 hover:-translate-y-1"
 					>
 						Get Started <LuArrowRight />
-					</a>
+					</Link>
 					{/* </div> */}
 				</div>
 			</section>
@@ -53,10 +53,12 @@ export default function LandingPage() {
 						Join thousands of creators who have discovered their perfect project
 						with {PROJECT_NAME}.
 					</p>
-
-					<Button className="font-semibold text-buttonText border-none bg-buttonPrimary">
+					<Link
+						href="/"
+						className="px-3 py-2 font-semibold rounded-md text-buttonText bg-buttonPrimary w-fit"
+					>
 						Start Generating Ideas
-					</Button>
+					</Link>
 				</div>
 			</section>
 		</div>
