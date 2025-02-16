@@ -12,8 +12,6 @@ export default function LandingPage() {
 		<div className="flex flex-col bg-background">
 			{/* Hero Section */}
 			<section className="py-20 text-center md:h-[70vh] flex items-center justify-center relative">
-				{/* bg color and grid */}
-				{/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(to_bottom,transparent,#f0f8ff)] dark:bg-[linear-gradient(to_bottom,transparent,#072333)] mask-[linear-gradient(to_bottom,transparent,black_50%)]" /> */}
 				<div className="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(to_bottom,transparent,#daddda)] dark:bg-[linear-gradient(to_bottom,transparent,#000)] mask-[linear-gradient(to_bottom,transparent,black_50%)]" />
 
 				<div className="z-10 flex flex-col items-center px-4 mx-auto">

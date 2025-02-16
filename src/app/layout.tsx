@@ -30,15 +30,15 @@ export default function RootLayout({
 }>) {
 	const customTheme: ThemeConfig = {
 		token: {
-			colorText: "var(--foreground)", // Adjust text color for better contrast in dark mode
+			colorText: "var(--foreground)",
 		},
 		components: {
 			Select: {
-				colorTextPlaceholder: "#A9A4A4", // Set text color for placeholder text
-				colorBgContainer: "#var(--background)", // Set background color for dropdown container
-				colorBorder: "var(--accent)", // Border color
+				colorTextPlaceholder: "#A9A4A4",
+				colorBgContainer: "#var(--background)",
+				colorBorder: "var(--accent)",
 				optionSelectedBg: "var(--backgroundDark)",
-				boxShadow: "0 0 0 1px var(--accent)", // Border color
+				boxShadow: "0 0 0 1px var(--accent)",
 			},
 		},
 	};

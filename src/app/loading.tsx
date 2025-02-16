@@ -6,7 +6,6 @@ const loading = () => {
 	const { theme } = useTheme();
 	return (
 		<div className="bg-background h-[90vh] flex justify-center items-center ">
-			{/* <p className="animate-bounce text-foreground">{PROJECT_NAME}</p> */}
 			<Image
 				height={100}
 				width={100}

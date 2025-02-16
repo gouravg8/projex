@@ -39,7 +39,7 @@ export default function Navbar() {
 					>
 						About
 					</Link>
-					{/* https://zmp0cn8k-3000.inc1.devtunnels.ms/ */}
+
 					<Link
 						href="/features"
 						className="hidden text-sm font-medium hover:underline md:block"
