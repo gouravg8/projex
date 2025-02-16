@@ -47,9 +47,13 @@ const IndexPage = () => {
 			setShowLoading(true);
 			message.success("Form submitted successfully!");
 			await refetch();
-			const loadingDuration = Date.now() - (loadingStartTime || Date.now());
 			setShowLoading(false);
 			form.resetFields();
+
+			document.getElementById("output")?.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
 		} catch (error) {
 			setShowLoading(false);
 			const errorMessage = (error as AxiosError<{ message: string }>)?.response
@@ -183,9 +187,11 @@ const IndexPage = () => {
 					</Button>
 				</Item>
 			</Form>
-			{showLoading && <ProjectLoading />}
+			<div id="output">
+				{showLoading && <ProjectLoading />}
 
-			{data && !showLoading && <Output data={data} />}
+				{data && !showLoading && <Output data={data} />}
+			</div>
 			{/* )} */}
 		</div>
 	);
