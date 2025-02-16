@@ -2,7 +2,6 @@
 import Link from "next/link";
 import ThemeToggle from "../theme-toggle";
 import { useTheme } from "../theme-provider";
-import { Button } from "antd";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PROJECT_NAME } from "@/constants";
