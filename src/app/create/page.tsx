@@ -7,9 +7,14 @@ import axios, { type AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import technologies from "@/constants/technologies";
 import ProjectLoading from "@/components/create/projectLoading";
+import { FiChevronDown } from "react-icons/fi";
 
 const { Option } = Select;
 const { Item } = Form;
+
+const SuffixIcon = () => {
+	return <FiChevronDown className="text-foreground text-lg font-thin" />;
+};
 
 const IndexPage = () => {
 	const [form] = Form.useForm();
@@ -84,6 +89,7 @@ const IndexPage = () => {
 							backgroundColor: "var(--background)",
 							color: "white",
 						}}
+						suffixIcon={<SuffixIcon />}
 					>
 						<Option value="easy">Easy</Option>
 						<Option value="medium">Medium</Option>
@@ -104,6 +110,7 @@ const IndexPage = () => {
 							backgroundColor: "var(--background)",
 							color: "white",
 						}}
+						suffixIcon={<SuffixIcon />}
 					>
 						<Option value="frontend">Frontend</Option>
 						<Option value="backend">Backend</Option>
@@ -125,12 +132,14 @@ const IndexPage = () => {
 							backgroundColor: "var(--background)",
 							color: "white",
 						}}
+						suffixIcon={<SuffixIcon />}
+						maxTagCount={"responsive"}
 						maxTagPlaceholder={(omittedValues) => (
 							<Tooltip
 								styles={{ root: { pointerEvents: "none" } }}
 								title={omittedValues.map(({ label }) => label).join(", ")}
 							>
-								<span>Hover Me</span>
+								<span>{omittedValues.length}+</span>
 							</Tooltip>
 						)}
 					>
@@ -155,6 +164,7 @@ const IndexPage = () => {
 							backgroundColor: "var(--background)",
 							color: "white",
 						}}
+						suffixIcon={<SuffixIcon />}
 					>
 						<Option value={true}>Yes</Option>
 						<Option value={false}>No</Option>
