@@ -1,8 +1,11 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const Output = ({ data }: any) => {
+type OutputProps = {
+	data: string;
+};
+
+const Output = ({ data }: OutputProps) => {
 	return (
 		<div className="w-[90vw] md:w-[70vw] mx-auto p-8">
 			<ReactMarkdown

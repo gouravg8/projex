@@ -2,10 +2,9 @@
 import HowItWorks from "@/components/home/HowItWorks";
 import WhyToUse from "@/components/home/WhyToUse";
 import { PROJECT_NAME } from "@/constants";
-import { Button } from "antd";
 import Link from "next/link";
 import React from "react";
-import { LuArrowRight, LuLightbulb, LuZap } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
 
 export default function LandingPage() {
 	return (

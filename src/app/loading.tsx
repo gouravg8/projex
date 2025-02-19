@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useTheme } from "@/components/theme-provider";
-const loading = () => {
+const Loading = () => {
 	const { theme } = useTheme();
 	return (
 		<div className="bg-background h-[90vh] flex justify-center items-center ">
@@ -17,4 +17,4 @@ const loading = () => {
 	);
 };
 
-export default loading;
+export default Loading;

@@ -19,10 +19,7 @@ const SuffixIcon = () => {
 const IndexPage = () => {
 	const [form] = Form.useForm();
 	const [country, setCountry] = useState("");
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [shouldFetch, setShouldFetch] = useState(false);
 	const [showLoading, setShowLoading] = useState(false);
-	const [loadingStartTime, setLoadingStartTime] = useState<number>(0);
 
 	useEffect(() => {
 		const userLanguage = navigator.language || "en-US";
@@ -42,7 +39,7 @@ const IndexPage = () => {
 		enabled: false,
 	});
 
-	const onFinish = async (values: FormData) => {
+	const onFinish = async () => {
 		try {
 			setShowLoading(true);
 			message.success("Form submitted successfully!");
@@ -66,8 +63,8 @@ const IndexPage = () => {
 		<div className="min-h-[90vh] bg-background text-foreground lg:pt-12">
 			<div className="py-8 text-center w-[90vw] mx-auto">
 				<p className="text-lg text-muted-foreground">
-					Tell us your preferences and we'll generate the perfect project for
-					you
+					Tell us your preferences and we&apos;ll generate the perfect project
+					for you
 				</p>
 			</div>
 			<Form

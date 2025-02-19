@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
 import ThemeToggle from "../theme-toggle";
-import { useTheme } from "../theme-provider";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PROJECT_NAME } from "@/constants";
 
 export default function Navbar() {
-	const { theme } = useTheme();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const pathname = usePathname();
 
