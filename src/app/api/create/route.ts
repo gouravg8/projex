@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -9,8 +10,9 @@ type DataType = {
 	difficulty: string;
 	type: string;
 	techStack: string[];
-	eagerToLearn: string;
+	eagerToLearn: boolean;
 };
+
 function getPrompt(data: DataType) {
 	const { difficulty, type, techStack, eagerToLearn } = data;
 	// for multiple tech stack
@@ -46,11 +48,33 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 // 	responseMimeType: "application/json",
 // };
 
+type ReqType = {
+	difficulty: string;
+	type: string;
+	techStack: string[];
+	eagerToLearn: boolean;
+};
 export async function POST(req: NextRequest) {
-	const data = await req.json();
+	const { difficulty, type, techStack, eagerToLearn }: ReqType =
+		await req.json();
 
 	// add json type response from google
-	const prompt = getPrompt(data);
+	const prompt = getPrompt({ difficulty, type, techStack, eagerToLearn });
 	const result = await model.generateContent(prompt);
-	return NextResponse.json(result.response.text());
+	const response = result.response.text();
+	console.log({ response });
+
+	const title = response.split("\n")[0].replace("# ", "");
+
+	const storeIdDb = await prisma.project.create({
+		data: {
+			title,
+			difficulty,
+			type,
+			techStack,
+			eagerToLearn,
+			authorId: 1,
+		},
+	});
+	return NextResponse.json(response);
 }
