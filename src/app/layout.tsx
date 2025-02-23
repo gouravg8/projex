@@ -6,6 +6,7 @@ import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/footer";
 import QueryProvider from "./QueryProvider";
 import { ConfigProvider, type ThemeConfig } from "antd";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -20,7 +21,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
 	title: "Projex",
-	description: "We help you to find best project idea that you can enjoy and shape your skills with real project",
+	description:
+		"We help you to find best project idea that you can enjoy and shape your skills with real project",
 };
 
 export default function RootLayout({
@@ -43,18 +45,20 @@ export default function RootLayout({
 		},
 	};
 	return (
-		<ThemeProvider>
-			<html lang="en">
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-				>
-					<Navbar />
-					<ConfigProvider theme={customTheme}>
-						<QueryProvider>{children}</QueryProvider>
-					</ConfigProvider>
-					<Footer />
-				</body>
-			</html>
-		</ThemeProvider>
+		<SessionProvider>
+			<ThemeProvider>
+				<html lang="en">
+					<body
+						className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+					>
+						<Navbar />
+						<ConfigProvider theme={customTheme}>
+							<QueryProvider>{children}</QueryProvider>
+						</ConfigProvider>
+						<Footer />
+					</body>
+				</html>
+			</ThemeProvider>
+		</SessionProvider>
 	);
 }

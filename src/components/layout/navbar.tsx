@@ -4,10 +4,14 @@ import ThemeToggle from "../theme-toggle";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PROJECT_NAME } from "@/constants";
+import { SignIn } from "../auth/signin-button";
+import { useSession } from "next-auth/react";
+import { SignOut } from "../auth/signout-button";
 
 export default function Navbar() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const pathname = usePathname();
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -44,12 +48,16 @@ export default function Navbar() {
 					>
 						Features
 					</Link>
-					<Link
+					{/* <Link
 						href={"/create"}
 						className="px-2 py-2 font-semibold border-none rounded-md text-buttonText bg-buttonPrimary"
 					>
 						Get Started
-					</Link>
+					</Link> */}
+					{/* <Button onClick={() => signIn("google", { redirectTo: "/create" })}>
+						SignIn
+					</Button> */}
+					{session?.user?.name ? <SignOut /> : <SignIn />}
 				</div>
 			</div>
 		</nav>
