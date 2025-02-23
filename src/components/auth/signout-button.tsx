@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import {
 	CaretDownFilled,
 	LogoutOutlined,
+	PlusOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
@@ -20,6 +21,13 @@ export function SignOut() {
 		},
 		{
 			key: "2",
+			label: "Create",
+			icon: <PlusOutlined />,
+			onClick: () => router.push("/create"),
+		},
+
+		{
+			key: "3",
 			label: "Log out",
 			icon: <LogoutOutlined />,
 			onClick: () => signOut(),
