@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
 
 	const title = response.split("\n")[0].replace("# ", "");
 
-	const storeIdDb = await prisma.project.create({
+	await prisma.project.create({
 		data: {
 			title,
 			difficulty,

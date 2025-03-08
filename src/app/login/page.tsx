@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { GoogleCircleFilled } from "@ant-design/icons";
-import { Button, Form } from "antd";
+import { Button } from "antd";
 
 export default function LoginPage() {
 	const login = async () => {
