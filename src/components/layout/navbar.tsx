@@ -57,7 +57,7 @@ export default function Navbar() {
 					{/* <Button onClick={() => signIn("google", { redirectTo: "/create" })}>
 						SignIn
 					</Button> */}
-					{session?.user?.name ? <SignOut /> : <SignIn />}
+					{session?.user?.name ? <SignOut /> : <SignIn>Sign In</SignIn>}
 				</div>
 			</div>
 		</nav>

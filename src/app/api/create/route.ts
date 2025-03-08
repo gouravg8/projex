@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse, type NextRequest } from "next/server";
+import { auth } from "@/auth";
 
 if (!process.env.GOOGLE_API_KEY) {
 	throw new Error("GOOGLE_API_KEY is not defined");
@@ -53,16 +54,24 @@ type ReqType = {
 	type: string;
 	techStack: string[];
 	eagerToLearn: boolean;
+	authorId: string;
 };
 export async function POST(req: NextRequest) {
 	const { difficulty, type, techStack, eagerToLearn }: ReqType =
 		await req.json();
 
+	const session = await auth();
+	if (!session) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
 	// add json type response from google
 	const prompt = getPrompt({ difficulty, type, techStack, eagerToLearn });
 	const result = await model.generateContent(prompt);
+	const user = await prisma.user.findUnique({
+		where: { email: session?.user?.email ?? "" },
+	});
 	const response = result.response.text();
-	console.log({ response });
 
 	const title = response.split("\n")[0].replace("# ", "");
 
@@ -71,10 +80,12 @@ export async function POST(req: NextRequest) {
 			title,
 			difficulty,
 			type,
+			content: response,
 			techStack,
 			eagerToLearn,
-			authorId: 1,
+			authorId: user?.id ?? "",
 		},
 	});
+
 	return NextResponse.json(response);
 }

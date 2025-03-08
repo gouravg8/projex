@@ -49,7 +49,7 @@ export default function RootLayout({
 			<ThemeProvider>
 				<html lang="en">
 					<body
-						className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+						className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
 					>
 						<Navbar />
 						<ConfigProvider theme={customTheme}>
