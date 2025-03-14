@@ -44,7 +44,7 @@ function getPrompt(data: DataType) {
 			- **Difficulty Level:** ${difficulty}
 			- **Type of Project:** ${type}
 			- **Tech Stack:** 
-				- ${techStack.join(", ")}
+				- ${techStackString}
 			- ${
 				eagerToLearn ? "use" : "Avoid"
 			} introducing complex new technologies or architectural approaches unnecessarily. Focus on efficient and reliable execution using familiar tools.
