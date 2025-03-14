@@ -42,8 +42,8 @@ const IndexPage = () => {
 	const onFinish = async () => {
 		try {
 			setShowLoading(true);
-			message.success("Form submitted successfully!");
 			await refetch();
+			message.success("Form submitted successfully!");
 			setShowLoading(false);
 			form.resetFields();
 
