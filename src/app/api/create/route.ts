@@ -19,26 +19,52 @@ function getPrompt(data: DataType) {
 	// for multiple tech stack
 	const techStackString = techStack.join(", ");
 
-	return `	
-			Based on the following project specifications:
+	const instruction = `- instruction you should know:
+			-> do not include the code in the response
+			-> use latest tech and commands to run
+			-> do not include the any outdated tech stack or outdated commands
+			-> use technical terms and jargon
+			-> use humanly language and do not use any ai like language
+			-> give commands like this:
+			    """bash
+				commands
+				"""
+			`;
 
-			Difficulty: ${difficulty}
-			Type: ${type}
-			Tech Stack: ${techStackString}
-			Eager to Learn New Technologies: ${eagerToLearn}
-			
-			Create a step-by-step project roadmap outlining the development process. The roadmap should:
-			Start with a brief, high-level overview of the project's purpose and goals. This overview should be concise and understandable to someone with a general understanding of ${type} systems.
-			Break down the project into manageable phases or stages. Each phase should have a clear objective.
-			For each phase, detail the specific tasks and steps required for completion. Use action-oriented language (e.g., "Design the database schema," "Implement the API endpoint for...", "Write unit tests for...").
-			Specify the key deliverables for each phase. This could include things like documentation, working code, or completed tests.
-			Account for the fact that this project is of ${difficulty} difficulty and prioritize using ${techStackString}. ${eagerToLearn ? "use" : "Avoid"} introducing complex new technologies or architectural approaches unnecessarily. Focus on efficient and reliable execution using familiar tools.
-			Do NOT provide any actual code solutions or code snippets. This roadmap should focus solely on the steps and logic required to build the ${type} based pro, not the specific code implementation and output should be in Markdown format.
-			Assume the user has a knowledge of ${type} ${techStackString} environment."`;
+	return `
+	  		${instruction}
+			# Project Prompt: Sustainable Food Delivery Platform
+
+			## Context
+			Provide a detailed description for creating a fullstack web development project. This project should focus on building a sustainable food delivery platform using the specified tech stack and following the given structure. The output should include a project name, vision, societal and developer impact, a step-by-step roadmap, and potential challenges.
+
+			## Instructions
+
+			1. **Project Details:**
+			- **Difficulty Level:** ${difficulty}
+			- **Type of Project:** ${type}
+			- **Tech Stack:** 
+				- ${techStack.join(", ")}
+			- ${
+				eagerToLearn ? "use" : "Avoid"
+			} introducing complex new technologies or architectural approaches unnecessarily. Focus on efficient and reliable execution using familiar tools.
+
+			2. **Output Requirements:**
+			- **Project Name:** Provide a unique and relevant name for the project.
+			- **Vision of the Project:** Explain the purpose and goals of the project, highlighting its significance.
+			- **Benefit:** Describe the positive impact the project will have on society.
+			- **Why you should do:** Outline the skills and experiences the developer will gain from working on the project.
+			- **Roadmap to Build the Project: **
+				1. **Project Setup:** Initial setup instructions, including configuring the tech stack and setting up Docker.
+				2. **Frontend Development:** Steps to design and develop the user interface, implement authentication, and manage state with Redux.
+				3. **Backend Development:** Instructions for setting up the server, creating RESTful APIs, and handling data management.
+				4. **Integration:** Guidelines for connecting the frontend with the backend and implementing real-time updates.
+				5. **Testing and Deployment:** Steps for writing tests, setting up CI/CD pipelines, and deploying the application.
+			- **Challenges the Developer Might Face:** Identify potential difficulties the developer may encounter during the project and provide suggestions for overcoming them.`;
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 // --- might be configuring this part
 // const generationConfig = {
