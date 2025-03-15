@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import ReactMarkdown from "react-markdown";
 
 type OutputProps = {
@@ -37,6 +37,42 @@ const Output = ({ data }: OutputProps) => {
 					li: ({ children }) => (
 						<li className="text-muted-foreground">{children}</li>
 					),
+					a: ({ href, children }) => (
+						<a
+							href={href}
+							className="text-blue-500 hover:text-blue-700 underline"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{children}
+						</a>
+					),
+					code({
+						inline,
+						className,
+						children,
+						...props
+					}: {
+						inline?: boolean;
+						className?: string;
+						children?: React.ReactNode;
+					}) {
+						const match = /language-(\w+)/.exec(className || "");
+						return !inline && match ? (
+							<div className="my-4 rounded-md overflow-hidden bg-muted">
+								<div className="max-h-[400px] overflow-auto p-4 font-mono text-sm">
+									{String(children).replace(/\n$/, "")}
+								</div>
+							</div>
+						) : (
+							<code
+								className="px-1.5 py-0.5 rounded-md bg-muted text-foreground font-mono"
+								{...props}
+							>
+								{children}
+							</code>
+						);
+					},
 				}}
 			>
 				{data}
