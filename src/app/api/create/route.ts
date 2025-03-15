@@ -34,7 +34,10 @@ function getPrompt(data: DataType) {
 
 	const instruction = `# Instructions for Response Format:
 		- Do NOT include any code implementations in your response
-		- Use only the latest versions of technologies and commands
+		- Use ONLY the latest LTS versions of technologies and frameworks
+		- AVOID recommending outdated tools like create-react-app
+		- For React projects, recommend Vite, Next.js, or other modern tooling
+		- For Node.js, use the current LTS version
 		- Format terminal commands in code blocks using triple backticks with bash:
 		  \`\`\`bash
 		  command here
@@ -77,7 +80,7 @@ function getPrompt(data: DataType) {
 		   - What career opportunities might this project prepare them for?
 		
 		4. **Development Roadmap:**
-		   - Project Setup & Environment Configuration
+		   - Project Setup & Environment Configuration (using modern tooling)
 		   - Frontend Architecture & Implementation
 		   - Backend Development & API Design
 		   - Data Management & Integration

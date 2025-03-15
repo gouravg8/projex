@@ -25,18 +25,14 @@ const Output = ({ data }: OutputProps) => {
 							{children}
 						</h3>
 					),
-					p: ({ children }) => (
-						<p className="mb-4 text-base text-muted-foreground">{children}</p>
-					),
+					p: ({ children }) => <p className="mb-4">{children}</p>,
 					strong: ({ children }) => (
 						<span className="font-semibold text-foreground">{children}</span>
 					),
 					ul: ({ children }) => (
 						<ul className="pl-6 mt-2 mb-6 space-y-2 list-disc">{children}</ul>
 					),
-					li: ({ children }) => (
-						<li className="text-muted-foreground">{children}</li>
-					),
+					li: ({ children }) => <li>{children}</li>,
 					a: ({ href, children }) => (
 						<a
 							href={href}
