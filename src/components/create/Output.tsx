@@ -7,7 +7,7 @@ type OutputProps = {
 
 const Output = ({ data }: OutputProps) => {
 	return (
-		<div className="w-[90vw] md:w-[70vw] mx-auto p-8">
+		<div className="w-[90vw] md:w-[70vw] mx-auto p-2 md:p-8 overflow-x-auto break-words">
 			<ReactMarkdown
 				components={{
 					h1: ({ children }) => (
