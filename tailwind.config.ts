@@ -11,8 +11,6 @@ const config: Config = {
 		extend: {
 			colors: {
 				background: "var(--background)",
-				// backgroundDark: "var(--background-dark)",
-				backgroundDark: "var(--background)",
 				foreground: "var(--foreground)",
 				primary: "var(--primary)",
 				buttonPrimary: "var(--button-primary)",
@@ -20,6 +18,10 @@ const config: Config = {
 				secondary: "var(--secondary)",
 				accent: "var(--accent)",
 				warning: "var(--warning)",
+				muted: "var(--muted)",
+				"muted-foreground": "var(--muted-foreground)",
+				border: "var(--border)",
+				input: "var(--input)",
 			},
 		},
 	},
