@@ -42,15 +42,14 @@ const IndexPage = () => {
 	const onFinish = async () => {
 		try {
 			setShowLoading(true);
+			document.getElementById("output")?.scrollIntoView({
+				behavior: "smooth",
+				block: "end",
+			});
 			await refetch();
 			message.success("Form submitted successfully!");
 			setShowLoading(false);
 			form.resetFields();
-
-			document.getElementById("output")?.scrollIntoView({
-				behavior: "smooth",
-				block: "start",
-			});
 		} catch (error) {
 			setShowLoading(false);
 			const errorMessage = (error as AxiosError<{ message: string }>)?.response
