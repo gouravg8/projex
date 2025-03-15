@@ -1,5 +1,4 @@
 "use client";
-import { Spin } from "antd";
 import type React from "react";
 import { createContext, useContext, useState, useEffect } from "react";
 
@@ -10,7 +9,9 @@ interface ThemeContextType {
 	toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+	undefined,
+);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,

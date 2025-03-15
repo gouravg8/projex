@@ -1,15 +1,17 @@
 "use client";
 import Link from "next/link";
 import ThemeToggle from "../theme-toggle";
-import { useTheme } from "../theme-provider";
-import { Button } from "antd";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PROJECT_NAME } from "@/constants";
+import { SignIn } from "../auth/signin-button";
+import { useSession } from "next-auth/react";
+import { SignOut } from "../auth/signout-button";
 
 export default function Navbar() {
-	const { theme } = useTheme();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const pathname = usePathname();
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -29,7 +31,7 @@ export default function Navbar() {
 		>
 			<div className="w-full md:w-[80vw] flex items-center justify-between py-4 px-6">
 				<Link href="/" className="text-2xl font-bold">
-					Creovate
+					{PROJECT_NAME}
 				</Link>
 				<div className="flex items-center space-x-4">
 					<ThemeToggle />
@@ -39,19 +41,23 @@ export default function Navbar() {
 					>
 						About
 					</Link>
-					{/* https://zmp0cn8k-3000.inc1.devtunnels.ms/ */}
+
 					<Link
 						href="/features"
 						className="hidden text-sm font-medium hover:underline md:block"
 					>
 						Features
 					</Link>
-					<Link
+					{/* <Link
 						href={"/create"}
-						className="px-2 py-2 font-semibold border-none rounded-md text-[#041424] bg-buttonPrimary"
+						className="px-2 py-2 font-semibold border-none rounded-md text-buttonText bg-buttonPrimary"
 					>
 						Get Started
-					</Link>
+					</Link> */}
+					{/* <Button onClick={() => signIn("google", { redirectTo: "/create" })}>
+						SignIn
+					</Button> */}
+					{session?.user?.name ? <SignOut /> : <SignIn>Sign In</SignIn>}
 				</div>
 			</div>
 		</nav>
