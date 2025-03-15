@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { prisma } from "@/lib/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse, type NextRequest } from "next/server";
@@ -14,55 +15,6 @@ type DataType = {
 	eagerToLearn: boolean;
 };
 
-function getPrompt(data: DataType) {
-	const { difficulty, type, techStack, eagerToLearn } = data;
-	// for multiple tech stack
-	const techStackString = techStack.join(", ");
-
-	const instruction = `- instruction you should know:
-			-> do not include the code in the response
-			-> use latest tech and commands to run
-			-> do not include the any outdated tech stack or outdated commands
-			-> use technical terms and jargon
-			-> use humanly language and do not use any ai like language
-			-> give commands like this:
-			    """bash
-				commands
-				"""
-			`;
-
-	return `
-	  		${instruction}
-			# Project Prompt: Sustainable Food Delivery Platform
-
-			## Context
-			Provide a detailed description for creating a fullstack web development project. This project should focus on building a sustainable food delivery platform using the specified tech stack and following the given structure. The output should include a project name, vision, societal and developer impact, a step-by-step roadmap, and potential challenges.
-
-			## Instructions
-
-			1. **Project Details:**
-			- **Difficulty Level:** ${difficulty}
-			- **Type of Project:** ${type}
-			- **Tech Stack:** 
-				- ${techStackString}
-			- ${
-				eagerToLearn ? "use" : "Avoid"
-			} introducing complex new technologies or architectural approaches unnecessarily. Focus on efficient and reliable execution using familiar tools.
-
-			2. **Output Requirements:**
-			- **Project Name:** Provide a unique and relevant name for the project.
-			- **Vision of the Project:** Explain the purpose and goals of the project, highlighting its significance.
-			- **Benefit:** Describe the positive impact the project will have on society.
-			- **Why you should do:** Outline the skills and experiences the developer will gain from working on the project.
-			- **Roadmap to Build the Project: **
-				1. **Project Setup:** Initial setup instructions, including configuring the tech stack and setting up Docker.
-				2. **Frontend Development:** Steps to design and develop the user interface, implement authentication, and manage state with Redux.
-				3. **Backend Development:** Instructions for setting up the server, creating RESTful APIs, and handling data management.
-				4. **Integration:** Guidelines for connecting the frontend with the backend and implementing real-time updates.
-				5. **Testing and Deployment:** Steps for writing tests, setting up CI/CD pipelines, and deploying the application.
-			- **Challenges the Developer Might Face:** Identify potential difficulties the developer may encounter during the project and provide suggestions for overcoming them.`;
-}
-
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
@@ -74,6 +26,82 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 // 	maxOutputTokens: 8192,
 // 	responseMimeType: "application/json",
 // };
+
+function getPrompt(data: DataType) {
+	const { difficulty, type, techStack, eagerToLearn } = data;
+	// for multiple tech stack
+	const techStackString = techStack.join(", ");
+
+	const instruction = `# Instructions for Response Format:
+		- Do NOT include any code implementations in your response
+		- Use only the latest versions of technologies and commands
+		- Format terminal commands in code blocks using triple backticks with bash:
+		  \`\`\`bash
+		  command here
+		  \`\`\`
+		- Be concise but thorough in your explanations
+		- Use technical terminology appropriate for the difficulty level
+		- Use natural, human-like language
+		- Organize your response with clear headings and bullet points
+	`;
+
+	return `
+		${instruction}
+		# Project Request: Web Development Project
+
+		## Project Parameters
+		- **Difficulty Level:** ${difficulty}
+		- **Project Type:** ${type}
+		- **Required Technologies:** ${techStackString}
+		- **Learning Approach:** ${eagerToLearn ? "Developer is eager to learn new technologies and architectural patterns" : "Focus on familiar technologies and straightforward implementation"}
+
+		## Output Requirements
+		**Project Name:** Create a memorable, relevant name for this project
+		
+		1. **Project Overview:**
+		   - What problem does this project solve?
+		   - Who is the target audience?
+		   - What are the key features and functionalities?
+		   - How does it differ from existing solutions?
+		
+		2. **Stakeholder Benefits:**
+		   - How will users benefit from this project?
+		   - What value does it provide to businesses or organizations?
+		   - How might it impact society or specific communities?
+		   - What are the potential economic or social benefits?
+		
+		3. **Developer Growth:**
+		   - What technical skills will be strengthened by building this project?
+		   - What architectural patterns or principles will be learned?
+		   - How will this project enhance a developer's portfolio?
+		   - What career opportunities might this project prepare them for?
+		
+		4. **Development Roadmap:**
+		   - Project Setup & Environment Configuration
+		   - Frontend Architecture & Implementation
+		   - Backend Development & API Design
+		   - Data Management & Integration
+		   - Testing, Deployment & DevOps
+		
+		5. **Technical Approach:**
+		   - Recommended architecture and design patterns
+		   - Specific libraries and tools to use with the required technologies
+		   - Database design considerations
+		   - API structure and integration points
+		   - Performance and scalability considerations
+		
+		6. **Learning Resources:**
+		   - Specific documentation, tutorials, or courses for key technologies
+		   - Community resources or forums for support
+		   - Books or articles that would be helpful
+		
+		7. **Potential Challenges and Solutions:**
+		   - Technical hurdles the developer might face
+		   - Common pitfalls in similar projects
+		   - Strategies to overcome these challenges
+		
+		Make the project realistic, engaging, and aligned with current industry practices. Focus on creating something that addresses real-world needs while providing valuable learning opportunities.`;
+}
 
 type ReqType = {
 	difficulty: string;
@@ -91,7 +119,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 	}
 
-	// add json type response from google
+	//---- add json type response from google
 	const prompt = getPrompt({ difficulty, type, techStack, eagerToLearn });
 	const result = await model.generateContent(prompt);
 	const user = await prisma.user.findUnique({
