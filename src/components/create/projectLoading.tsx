@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { List } from "antd";
+import React, { useState, useEffect, useRef } from "react";
+import { Steps, ConfigProvider } from "antd";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 const loadingSteps = [
@@ -12,69 +11,118 @@ const loadingSteps = [
 ];
 
 const ProjectLoading = ({
-	loadingDuration = 5000,
-}: { loadingDuration?: number }) => {
+	isLoading = true,
+	loadingDuration = 15000,
+}: {
+	isLoading?: boolean;
+	loadingDuration?: number;
+}) => {
 	const [currentStep, setCurrentStep] = useState(0);
 	const stepDuration = loadingDuration / (loadingSteps.length - 1);
+	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+	const completionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentStep((prev) =>
-				prev < loadingSteps.length - 1 ? prev + 1 : prev,
-			);
+		intervalRef.current = setInterval(() => {
+			setCurrentStep((prev) => {
+				// If we're at the second-to-last step and still loading, stay there
+				if (prev === loadingSteps.length - 2 && isLoading) {
+					return prev;
+				}
+				// Otherwise, proceed to the next step if not at the end
+				return prev < loadingSteps.length - 1 ? prev + 1 : prev;
+			});
 		}, stepDuration);
 
-		return () => clearInterval(interval);
-	}, [stepDuration]);
+		return () => {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+			if (completionTimeoutRef.current) {
+				clearTimeout(completionTimeoutRef.current);
+			}
+		};
+	}, [stepDuration, isLoading]);
 
-	const slideVariants = {
-		hidden: { x: -100, opacity: 0 },
-		visible: (index: number) => ({
-			x: 0,
-			opacity: 1,
-			transition: {
-				delay: index * 0.3,
-				duration: 0.5,
-				type: "spring",
-				stiffness: 100,
+	// When isLoading becomes false, ensure we complete all steps
+	useEffect(() => {
+		if (!isLoading) {
+			// Clear the existing interval
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+				intervalRef.current = null;
+			}
+			
+			// If we haven't reached the final step yet, complete the steps with a smooth animation
+			if (currentStep < loadingSteps.length - 1) {
+				// Calculate remaining steps
+				const remainingSteps = loadingSteps.length - 1 - currentStep;
+				// Use a shorter duration for each remaining step to complete faster
+				const quickStepDuration = Math.min(500, stepDuration / 2);
+				
+				let stepCounter = currentStep;
+				
+				// Set up a quick interval to complete the remaining steps
+				const quickInterval = setInterval(() => {
+					stepCounter++;
+					setCurrentStep(stepCounter);
+					
+					if (stepCounter >= loadingSteps.length - 1) {
+						clearInterval(quickInterval);
+					}
+				}, quickStepDuration);
+				
+				// Store the interval for cleanup
+				intervalRef.current = quickInterval;
+				
+				// Set a timeout to ensure we reach the final step even if something goes wrong
+				completionTimeoutRef.current = setTimeout(() => {
+					setCurrentStep(loadingSteps.length - 1);
+					if (intervalRef.current) {
+						clearInterval(intervalRef.current);
+						intervalRef.current = null;
+					}
+				}, quickStepDuration * remainingSteps + 100);
+			}
+		}
+	}, [isLoading, currentStep, stepDuration]);
+
+	const customTheme = {
+		components: {
+			Steps: {
+				colorPrimary: "var(--primary)",
+				colorText: "var(--foreground)",
+				colorTextDescription: "var(--muted-foreground)",
+				colorTextQuaternary: "var(--muted-foreground)",
+				controlItemBgActive: "var(--primary)",
 			},
-		}),
+		},
 	};
+	const items = loadingSteps.map((step, index) => ({
+		title: step,
+		status:
+			index < currentStep
+				? "finish"
+				: index === currentStep
+					? "process"
+					: ("wait" as "finish" | "process" | "wait" | "error" | undefined),
+		icon:
+			index <= currentStep ? (
+				<BsCheckCircleFill size={30} className="text-buttonPrimary" />
+			) : undefined,
+	}));
 
 	return (
-		<List
-			className="flex items-center justify-center align-middle min-h-[60vh] w-full"
-			itemLayout="horizontal"
-			dataSource={loadingSteps}
-			renderItem={(step, index) => (
-				<motion.div
-					custom={index}
-					initial="hidden"
-					animate="visible"
-					variants={slideVariants}
-				>
-					<List.Item>
-						{index <= currentStep && (
-							<div className="flex items-center w-full space-x-4 text-green-600 dark:text-green-500">
-								<motion.div
-									initial={{ scale: 0 }}
-									animate={{ scale: 1 }}
-									transition={{ duration: 0.3 }}
-								>
-									<BsCheckCircleFill
-										className="text-lg "
-										style={{ opacity: index <= currentStep ? 1 : 0 }}
-									/>
-								</motion.div>
-								<motion.span className="text-base font-medium">
-									{step}
-								</motion.span>
-							</div>
-						)}
-					</List.Item>
-				</motion.div>
-			)}
-		/>
+		<div className="flex items-center justify-center align-middle min-h-[60vh] w-full p-8">
+			<ConfigProvider theme={customTheme}>
+				<Steps
+					direction="vertical"
+					current={currentStep}
+					items={items}
+					className="w-full max-w-md"
+				/>
+			</ConfigProvider>
+		</div>
 	);
 };
 

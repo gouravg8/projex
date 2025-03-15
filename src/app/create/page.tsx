@@ -171,7 +171,7 @@ const IndexPage = () => {
 					</Item>
 				</Form>
 				<div id="output">
-					{showLoading && <ProjectLoading />}
+					{showLoading && <ProjectLoading isLoading={isLoading} />}
 					{data && !showLoading && <Output data={data} />}
 				</div>
 			</div>
