@@ -35,7 +35,7 @@ export default function Navbar() {
 				</Link>
 				<div className="flex items-center space-x-4">
 					<ThemeToggle />
-					<Link
+					{/* <Link
 						href="/about"
 						className="hidden text-sm font-medium hover:underline md:block"
 					>
@@ -47,7 +47,7 @@ export default function Navbar() {
 						className="hidden text-sm font-medium hover:underline md:block"
 					>
 						Features
-					</Link>
+					</Link> */}
 					{/* <Link
 						href={"/create"}
 						className="px-2 py-2 font-semibold border-none rounded-md text-buttonText bg-buttonPrimary"
