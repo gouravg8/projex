@@ -10,6 +10,7 @@ import ProjectLoading from "@/components/create/projectLoading";
 import { FiChevronDown } from "react-icons/fi";
 import { useTheme } from "@/hooks/useTheme"; // Create this hook
 import { getAntdTheme } from "@/lib/antd-theme";
+import Loading from "../loading";
 
 const { Option } = Select;
 const { Item } = Form;
@@ -23,12 +24,25 @@ const IndexPage = () => {
 	const [country, setCountry] = useState("");
 	const [showLoading, setShowLoading] = useState(false);
 	const { theme } = useTheme();
+	const [themeLoaded, setThemeLoaded] = useState(false);
 
 	useEffect(() => {
 		const userLanguage = navigator.language || "en-US";
 		const countryCode = userLanguage.split("-")[1] || "US";
 		setCountry(countryCode.toUpperCase());
-	}, []);
+
+		// Handle theme loading
+		if (theme) {
+			setThemeLoaded(true);
+
+			// Force a re-render once the theme is properly loaded
+			const timer = setTimeout(() => {
+				form.setFieldsValue(form.getFieldsValue());
+			}, 100);
+
+			return () => clearTimeout(timer);
+		}
+	}, [theme, form]);
 
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: ["project"],
@@ -52,14 +66,19 @@ const IndexPage = () => {
 			await refetch();
 			message.success("Form submitted successfully!");
 			setShowLoading(false);
-			form.resetFields();
 		} catch (error) {
-			setShowLoading(false);
 			const errorMessage = (error as AxiosError<{ message: string }>)?.response
 				?.data?.message;
 			message.error(errorMessage ? errorMessage : "Something is wrong.");
+		} finally {
+			setShowLoading(false);
+			form.resetFields();
 		}
 	};
+
+	if (!themeLoaded) {
+		return <Loading />;
+	}
 
 	return (
 		<ConfigProvider theme={getAntdTheme(theme === "dark")}>
